@@ -1,6 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require("copy-webpack-plugin");
+const CopyPlugin = require('copy-webpack-plugin');
 const EslintWebpackPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
@@ -13,8 +13,8 @@ module.exports = {
     }),
     new EslintWebpackPlugin(),
     new CopyPlugin({
-     patterns: [
-        { from: "public/_redirects"},
+      patterns: [
+        { from: 'public/_redirects' },
       ],
     }),
   ],
@@ -49,6 +49,6 @@ module.exports = {
   },
   devServer: {
     static: './build',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
 };
