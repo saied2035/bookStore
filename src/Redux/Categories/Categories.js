@@ -1,17 +1,17 @@
-const BOOK_STATUS = 'bookStore/Categories/Book_STATUS'
+const BOOK_STATUS = 'bookStore/Categories/Book_STATUS';
 
-export const checkStatus = (status) => ( {type:BOOK_STATUS,payload:status} )
+export const checkStatus = (status) => ({ type: BOOK_STATUS, payload: status });
 
 const initialState = {
-	categories: []
-}
+  categories: [],
+};
 
-const categoriesReducer = (state=initialState,action={}){
-	switch (action.type) {
-		case BOOK_STATUS:
-		 return {...state,status:action.payload}
-		default:
-		 return state 
-	}
-}
-export default categoriesReducer; 
+const categoriesReducer = (state = initialState, action = {}) => {
+  switch (action.type) {
+    case BOOK_STATUS:
+      return { ...state, status: action.payload };
+    default:
+      return state;
+  }
+};
+export default categoriesReducer;

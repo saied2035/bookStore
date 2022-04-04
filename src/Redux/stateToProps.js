@@ -1,3 +1,3 @@
-const stateToProps = (state) => ({});
+const stateToProps = (state) => (state);
 
 export default stateToProps;
