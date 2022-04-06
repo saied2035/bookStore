@@ -1,33 +1,45 @@
-// const SAVE_BOOK = 'bookStore/Books/SAVE_BOOK';
+import { saveBook, loadBooks } from '../apiFunctions';
+
+const ADD_BOOK = 'bookStore/Books/ADD_BOOK';
 const BOOK_ADDED = 'bookStore/Books/BOOK_ADDED';
 const BOOK_REMOVED = 'bookStore/Books/BOOK_REMOVED';
-// const REQUEST_FAILED = 'bookStore/Books/REQUEST_FAILED';
 
-export const addBook = (book) => ({ type: BOOK_ADDED, payload: book });
+const LOAD_BOOKS = 'bookStore/Books/LOAD_BOOKS';
+const BOOKS_LOADED = 'bookStore/Books/BOOKS_LOADED';
+
+export const addBook = (book) => (dispatch) => {
+  dispatch({ type: ADD_BOOK });
+  saveBook(book).then((status) => {
+    if (status === 201) {
+      dispatch({ type: BOOK_ADDED, payload: book });
+    }
+  });
+};
+
+export const booksLoad = () => (dispatch) => {
+  dispatch({ type: LOAD_BOOKS });
+  loadBooks().then((books) => dispatch({
+    type: BOOKS_LOADED,
+    payload: books,
+  }));
+};
 
 export const removeBook = (index) => ({ type: BOOK_REMOVED, payload: index });
 
 const initialState = {
   books: [
-    {
-      id: 1, title: 'book1', type: 'Fiction', author: 'author1',
-    },
-    {
-      id: 2, title: 'book2', type: 'Action', author: 'author2',
-    },
-    {
-      id: 3, title: 'book3', type: 'Classics', author: 'author3',
-    },
-    {
-      id: 4, title: 'book4', type: 'Romance', author: 'author4',
-    },
   ],
 };
 
 const booksReducer = (state = initialState, action = {}) => {
   switch (action.type) {
+    case LOAD_BOOKS:
+    case ADD_BOOK:
+      return { ...state, waiting: true };
     case BOOK_ADDED:
-      return { ...state, books: [...state.books, action.payload] };
+      return { ...state, books: [...state.books, action.payload], waiting: false };
+    case BOOKS_LOADED:
+      return { ...state, books: [...state.books, ...action.payload] };
     case BOOK_REMOVED:
       return {
         ...state,
