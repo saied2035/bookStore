@@ -1,4 +1,4 @@
-const appId = 'xbFSLGX9BBtw4kSzTlSX';
+const appId = 'ynH6wNRxAndOw7ahOGz8';
 const api = `https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/${appId}`;
 
 export const saveBook = async ({
@@ -19,7 +19,19 @@ export const saveBook = async ({
 export const loadBooks = async () => {
   const response = await fetch(`${api}/books`).then((res) => res.json())
     .then((result) => result);
-  const booksArr = Object.values(response)
-    .map((book, i) => ({ ...book[0], id: i + 1, type: book[0].category }));
+
+  const booksArr = Object.entries(response)
+    .map(([id, book]) => ({ ...book[0], id: Number(id), type: book[0].category }));
   return booksArr;
+};
+
+export const removeBook = async (id) => {
+  const response = await fetch(`${api}/books/${id}`, {
+    method: 'DELETE',
+    body: JSON.stringify({ item_id: id }),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  }).then((res) => res.status);
+  return response;
 };
