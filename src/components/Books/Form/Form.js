@@ -6,15 +6,23 @@ import { addBook } from '../../../Redux/Books/Books';
 const Form = ({ id }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
+  const [type, setType] = useState('');
   const dispatch = useDispatch();
+  const categories = [
+    'Action', 'Classics', 'Detective', 'Romance', 'Fiction', 'History', 'Science',
+  ];
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        const book = { id, title, author };
+        if (!type.length) return;
+        const book = {
+          id, title, type, author,
+        };
         dispatch(addBook(book));
         setTitle('');
         setAuthor('');
+        setType('');
       }}
     >
       <h2>Add new book</h2>
@@ -32,6 +40,16 @@ const Form = ({ id }) => {
         value={author}
         required
       />
+      <select
+        value={type.length ? type : 'select your category'}
+        onChange={(e) => setType(e.target.value)}
+        name="categories"
+      >
+        <option value="select your category" disabled>select your category</option>
+        {
+        categories.map((category) => <option key={category} value={category}>{category}</option>)
+      }
+      </select>
       <button type="submit">Add new</button>
     </form>
   );
