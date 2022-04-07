@@ -2,7 +2,7 @@ import './Progress.css';
 
 const Progress = () => {
   const circumference = 29 * 2 * Math.PI;
-  const offset = circumference - ((0 / 100) * circumference);
+  const offset = circumference - ((100 / 100) * circumference);
   const progress = {
     strokeDashoffset: offset,
     strokeDasharray: `${circumference} ${circumference}`,
@@ -17,7 +17,7 @@ const Progress = () => {
         <defs>
           <linearGradient id="gradient">
             <stop offset="0%" stopColor="#307bbe" />
-            <stop offset="100%" stopColor="#379cf6" />
+            <stop offset="100%" stopColor="#307bbe" />
           </linearGradient>
         </defs>
         <circle
