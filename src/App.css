@@ -3,7 +3,9 @@
 body {
   background: #fafafa;
 }
-
+p {
+  margin-block-start: 0;
+}
 * {
   box-sizing: border-box;
   margin: 0;
