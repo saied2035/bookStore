@@ -5,15 +5,16 @@
   border: none;
   cursor: pointer;
   background-color: #0290ff;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', sans-serif;
   font-size: 0.813rem;
   font-weight: bold;
   letter-spacing: 0.5px;
   text-align: center;
   color: #fff;
 }
+
 #categories-msg {
   margin-left: 0.5rem;
   margin-top: 0.5rem;
-  font-family: 'Roboto Slab';
+  font-family: 'Roboto Slab', sans-serif;
 }
