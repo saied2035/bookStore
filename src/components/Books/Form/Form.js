@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addBook } from '../../../Redux/Books/Books';
+import './Form.css';
 
 const Form = ({ id }) => {
   const [title, setTitle] = useState('');
@@ -25,7 +26,7 @@ const Form = ({ id }) => {
         setType('');
       }}
     >
-      <h2>Add new book</h2>
+      <h2>ADD NEW BOOK</h2>
       <input
         type="text"
         placeholder="Book title"
@@ -41,16 +42,16 @@ const Form = ({ id }) => {
         required
       />
       <select
-        value={type.length ? type : 'select your category'}
+        value={type.length ? type : 'Category'}
         onChange={(e) => setType(e.target.value)}
         name="categories"
       >
-        <option value="select your category" disabled>select your category</option>
+        <option className="selected" value="Category" disabled>Category</option>
         {
         categories.map((category) => <option key={category} value={category}>{category}</option>)
       }
       </select>
-      <button type="submit">Add new</button>
+      <button type="submit">ADD BOOK</button>
     </form>
   );
 };
